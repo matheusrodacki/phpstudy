@@ -6,4 +6,10 @@ function somar($a,$b){
 
 }
 
+$matrix = array($a,2,4);
+
+echo "$matrix";
+
+
+
 ?>
