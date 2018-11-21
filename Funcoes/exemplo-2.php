@@ -7,4 +7,4 @@ function salario(){
 
 echo "José resebeu 3 salários ".(salario()*3);
 
-?
+?>
