@@ -2,11 +2,11 @@
 
 function ola(){
 
-    return "Olá Mundo!!!11 <br>";
+    echo "Olá Mundo!!!11 <br>";
 
 }
 
-echo ola();
-echo ola();
+ola();
+ola();
 
 ?>
