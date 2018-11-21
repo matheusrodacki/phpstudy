@@ -7,6 +7,8 @@ function ola(){
 }
 
 echo ola();
-echo ola();
+$frase = ola();
+
+echo strlen($frase);
 
 ?>
