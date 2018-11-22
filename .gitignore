@@ -1,1 +1,9 @@
-.vscode/settings.json
+# ignora os arquivos com extensões 
+.gitignore
+# ignora quaisquer diretórios chamados "metadata"
+.metadata/
+.recommenders/
+# ignora quaisquer diretórios chamados de configuração do VS Code
+.vscode
+#ignora arquivos de teste
+teste.php
