@@ -13,10 +13,24 @@ class Endereco{
         $this->cidade = $c;
 
     }
+
+    public function __destruct(){
+
+        //var_dump('DESTRUIR');
+    }
+
+    public function __toString(){
+
+        return $this->logradouro.", ".$this->numero." - ".$this->cidade;
+    }
 }
 
 $meuEndereco = new Endereco("Rua Julião", "27", "São Paulo");
 
 var_dump($meuEndereco);
+
+//unset($meuEndereco);
+
+echo $meuEndereco;
 
 ?>
