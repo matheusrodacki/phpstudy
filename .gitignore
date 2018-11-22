@@ -3,7 +3,7 @@
 # ignora quaisquer diretórios chamados "metadata"
 .metadata/
 .recommenders/
-# ignora quaisquer diretórios chamados de configuração do VS Code
+# ignora quaisquer diretórios de configuração do VS Code
 .vscode
 #ignora arquivos de teste
 teste.php
