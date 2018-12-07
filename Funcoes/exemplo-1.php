@@ -10,5 +10,6 @@ echo ola();
 $frase = ola();
 
 echo strlen($frase);
+var_dump($frase);
 
 ?>
