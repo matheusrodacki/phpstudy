@@ -1,6 +1,7 @@
 <?php
 
 require_once("config.php");
+
 /** 
  * $sql = new Sql();
  *
@@ -10,10 +11,25 @@ require_once("config.php");
  *  
  */
 
-$user = new Usuario();
+//carrega usuario
+//$user = new Usuario();
+//$user->loadById(5);
+//echo $user;
 
-$user->loadById(5);
+//Carrega uma lista de usuaios
+//$lista = Usuario::getList();
+//echo json_encode($lista);
 
-echo $user;
+//Carrega lista de usuario buscando pelo login
+//$search = Usuario::search("s");
+//echo json_encode($search);
+
+//Carrega usuario usando login e senha
+
+$usuario = new Usuario();
+$usuario->login("jose", "12345");
+
+echo $usuario;
+
 
 ?>
