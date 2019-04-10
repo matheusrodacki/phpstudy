@@ -123,7 +123,7 @@ class Usuario {
 
         if (count($results) > 0){
 
-            $tihs->setData($results[0]);
+            $this->setData($results[0]);
            
 
         } else {
