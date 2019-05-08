@@ -7,3 +7,7 @@
 .vscode
 #ignora arquivos de teste
 teste.php
+
+#ignora arquivos do linux
+.my.cnf.19160
+.mysql.19160
