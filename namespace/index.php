@@ -6,12 +6,10 @@ use Cliente\Cadastro;
 
 $cad = new Cadastro();
 
-$cad->setNome("Djalma Sindeux");
-$cad->setEmail("djalma@hcode.com.br");
-$cad->setSenha("12345");
+$cad->setNome("Anthony Ribeiro");
+$cad->setEmail("anthonyribeiro@gmail.com");
+$cad->setSenha("anthony");
 
-$cad->registrarVenda();
-
-
+echo $cad;
 
 ?>

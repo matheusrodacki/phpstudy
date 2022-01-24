@@ -1,0 +1,20 @@
+{
+    "name": "terminus/compject",
+    "description": "Class about Composer and PHP learning.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Terminus\\Compject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matheus Rodacki",
+            "email": "matheus.rodacki@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "monolog/monolog":"1.0.*"
+    }
+}

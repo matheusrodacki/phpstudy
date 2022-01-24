@@ -4,36 +4,32 @@ require_once("config.php");
 
 $sql = new Sql();
 
-$usuarios = $sql->select("SELECT * FROM tbUsuarios ORDER BY deslogin");
+$usuarios = $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
 
 $headers = array();
 
-foreach ($usuarios[0] as $key => $value){
-    array_push($headers, ucfirst($key));
+foreach ($usuarios[0] as $key => $value) {
+	array_push($headers, ucfirst($key));
 }
 
+$file = fopen("usuarios.csv", "w+");
 
-$file = fopen("usuarios.csv","w+");
+fwrite($file, implode(",", $headers) . "\r\n");
 
-fwrite($file, implode(",",$headers) . "\r\n");
+foreach ($usuarios as $row) {
+	
+	$data = array();
 
+	foreach ($row as $key => $value) {
+		
+		array_push($data, $value);
 
-foreach ($usuarios as $row ){
+	}// End foreach de coluna
 
-    $data = array();
+	fwrite($file, implode(",", $data) . "\r\n");
 
-    foreach ($row as $key => $value){
-
-        array_push($data, $value);
-
-    }// End foreach de coluna
-
-    fwrite($file, implode(",",$data) . "\r\n");
-
-}// End foreach de linha
+} // End foreach de linha
 
 fclose($file);
-
-
 
 ?>

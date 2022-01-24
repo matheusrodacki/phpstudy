@@ -2,17 +2,16 @@
 
 $name = "images";
 
-if (!is_dir($name)){
+if(!is_dir($name)) {
 
-    mkdir($name);
-    echo "Diretório $name criado com sucesso!";
+	mkdir($name); // cria um diretório
+	echo "Diretório $name criado com sucesso";
 
 } else {
 
-    rmdir($name);
+	rmdir($name); // remove um diretório
+	echo "Já existe o diretório: $name foi removido";
 
-    echo "Já existe o diretório: $name e foi removido";
 }
-
 
 ?>

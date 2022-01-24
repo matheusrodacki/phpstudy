@@ -2,16 +2,18 @@
 
 spl_autoload_register(function($nameClass){
 
-    var_dump($nameClass);
+	//Nome do diretórios das classes
+	$dirClass = "class";
 
-    $dirClass = "class";
-    $filename = $dirClass . DIRECTORY_SEPARATOR . $nameClass .".php";
+	//Nome do arquivo + pasta.
+	//DIRECTORY_SEPARATOR é uma constante para barras / \.
+	$fileName = $dirClass .DIRECTORY_SEPARATOR. $nameClass . ".php";
 
-    if(file_exists($filename)){
+	var_dump($fileName);
 
-            require_once($filename);
-    }
-
+	if (file_exists($fileName)){
+		require_once($fileName);
+	}
 });
 
 ?>

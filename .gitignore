@@ -1,13 +1,23 @@
-# ignora os arquivos com extensões 
+# ignore file
 .gitignore
-# ignora quaisquer diretórios chamados "metadata"
+
+# ignore metadata directors
 .metadata/
 .recommenders/
-# ignora quaisquer diretórios de configuração do VS Code
+
+# ignore VS Code director
 .vscode
-#ignora arquivos de teste
+
+#ignor test files
 teste.php
 
-#ignora arquivos do linux
+#ignore composer files
+composer/vendor
+composer/composer.lock
+composer/composer.phar
+composer/setup.sh
+
+
+#ignor linux files
 .my.cnf.19160
 .mysql.19160

@@ -5,20 +5,19 @@ $images = scandir("images");
 $data = array();
 
 foreach ($images as $img) {
+	if (!in_array($img, array(".", ".."))) {
 
-    if(!in_array($img, array(".",".."))){
+		$filename = "images" . DIRECTORY_SEPARATOR . $img;
 
-        $filename = "images" . DIRECTORY_SEPARATOR . $img;
+		$info = pathinfo($filename);
 
-        $info = pathinfo($filename);
+		$info['size'] = filesize($filename);
+		$info['modified'] = date("d/m/Y H:i:s", filemtime($filename));
+		$info['url'] = "http://cursos.local.com/curso-php-udemy-hcode/DIR/". str_replace("\\", "/", $filename);
 
-        $info["size"] = filesize($filename);
-        $info["modified"] = date("d/m/Y H:i:s", filemtime($filename));
-        $info["url"] = "http://localhost/phpstudy/DIR/" . str_replace("\\", "/", $filename);
+		array_push($data, $info);
 
-        array_push($data, $info);
-    }
-
+	}
 }
 
 echo json_encode($data);

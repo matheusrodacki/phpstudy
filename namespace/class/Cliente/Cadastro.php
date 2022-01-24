@@ -1,12 +1,14 @@
 <?php
+
 namespace Cliente;
 
-Class Cadastro extends \Cadastro {
+class Cadastro extends \Cadastro {
 
-    public function registrarVenda(){
+	public function registrarVenda(){
 
-        echo "Foi registrada uma nova venda para o cliente ".$this->getNome();
-    }
+		echo "Foi registrada uma venda para o cliente ".$this->getNome();
+
+	}
 
 }
 
