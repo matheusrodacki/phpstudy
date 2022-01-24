@@ -1,12 +1,34 @@
 <?php
 
+/*-
+ * Copyright © 2011–2014 Federico Ulfo and a lot of awesome contributors
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * “Software”), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 namespace Rain;
 
 /**
  *  RainTPL
  *  --------
  *  Realized by Federico Ulfo & maintained by the Rain Team
- *  Distributed under GNU/LGPL 3 License
  *
  *  @version 3.0 Alpha milestone: https://github.com/rainphp/raintpl3/issues/milestones?with_issues=no
  */
@@ -108,7 +130,7 @@ class Tpl {
     }
 
     /**
-     * Configure the object
+     * Object specific configuration
      *
      * @param string, array $setting: name of the setting to configure
      * or associative array type 'setting' => 'value'
@@ -119,14 +141,20 @@ class Tpl {
         if (is_array($setting))
             foreach ($setting as $key => $value)
                 $this->objectConfigure($key, $value);
-        else if (isset(static::$conf[$setting]))
+        else if (isset(static::$conf[$setting])) {
+
+            // add ending slash if missing
+            if ($setting == "tpl_dir" || $setting == "cache_dir") {
+                $value = self::addTrailingSlash($value);
+            }
             $this->objectConf[$setting] = $value;
+        }
 
         return $this;
     }
 
     /**
-     * Configure the template
+     * Global configurations
      *
      * @param string, array $setting: name of the setting to configure
      * or associative array type 'setting' => 'value'
@@ -137,8 +165,13 @@ class Tpl {
             foreach ($setting as $key => $value)
                 static::configure($key, $value);
         else if (isset(static::$conf[$setting])) {
-            static::$conf[$setting] = $value;
 
+            // add ending slash if missing
+            if ($setting == "tpl_dir" || $setting == "cache_dir") {
+                $value = self::addTrailingSlash($value);
+            }
+
+            static::$conf[$setting] = $value;
             static::$conf['checksum'][$setting] = $value; // take trace of all config
         }
     }
@@ -224,9 +257,10 @@ class Tpl {
      * @return string: full filepath that php must use to include
      */
     protected function checkTemplate($template) {
+
         // set filename
         $templateName = basename($template);
-        $templateBasedir = strpos($template, DIRECTORY_SEPARATOR) ? dirname($template) . DIRECTORY_SEPARATOR : null;
+        $templateBasedir = strpos($template, '/') !== false ? dirname($template) . '/' : null;
         $templateDirectory = null;
         $templateFilepath = null;
         $parsedTemplateFilepath = null;
@@ -238,15 +272,27 @@ class Tpl {
         }
 
         $isFileNotExist = true;
-        foreach($templateDirectories as $templateDirectory) {
-            $templateDirectory .= $templateBasedir;
+
+        // absolute path
+        if ($template[0] == '/') {
+            $templateDirectory = $templateBasedir;
             $templateFilepath = $templateDirectory . $templateName . '.' . $this->config['tpl_ext'];
             $parsedTemplateFilepath = $this->config['cache_dir'] . $templateName . "." . md5($templateDirectory . serialize($this->config['checksum'])) . '.rtpl.php';
-
             // For check templates are exists
             if (file_exists($templateFilepath)) {
                 $isFileNotExist = false;
-                break;
+            }
+        } else {
+            foreach($templateDirectories as $templateDirectory) {
+                $templateDirectory .= $templateBasedir;
+                $templateFilepath = $templateDirectory . $templateName . '.' . $this->config['tpl_ext'];
+                $parsedTemplateFilepath = $this->config['cache_dir'] . $templateName . "." . md5($templateDirectory . serialize($this->config['checksum'])) . '.rtpl.php';
+
+                // For check templates are exists
+                if (file_exists($templateFilepath)) {
+                    $isFileNotExist = false;
+                    break;
+                }
             }
         }
 
@@ -287,6 +333,19 @@ class Tpl {
         }
 
         return $parsedTemplateFilepath;
+    }
+
+    private static function addTrailingSlash($folder) {
+
+        if (is_array($folder)) {
+            foreach($folder as &$f) {
+                $f = self::addTrailingSlash($f);
+            }
+        } elseif ( strlen($folder) > 0 && $folder[0] != '/' ) {
+            $folder = $folder . "/";
+        }
+        return $folder;
+
     }
 
 }

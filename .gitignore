@@ -1,6 +1,3 @@
-# ignore file
-.gitignore
-
 # ignore metadata directors
 .metadata/
 .recommenders/
@@ -8,15 +5,11 @@
 # ignore VS Code director
 .vscode
 
-#ignor test files
-teste.php
-
 #ignore composer files
-composer/vendor
-composer/composer.lock
-composer/composer.phar
-composer/setup.sh
-
+vendor
+composer.lock
+composer.phar
+setup.sh
 
 #ignor linux files
 .my.cnf.19160
