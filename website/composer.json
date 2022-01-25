@@ -1,5 +1,6 @@
 {
-	"require":{
-		"slim/slim":"2.0"
-	}
+    "require":{
+        "silm/slim":"2.0"
+
+    }
 }
