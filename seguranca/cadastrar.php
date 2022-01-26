@@ -9,7 +9,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array(
-	"secret"=>"6Lcs6i0UAAAAANm5kKSh2MJh6lieDR7QB7KA5jqt",
+	"secret"=>"6LdI5TkeAAAAAHbBA5B8zYVFAYTIK0tNcG1Nehgd",
 	"response"=>$_POST["g-recaptcha-response"],
 	"remoteip"=>$_SERVER['REMOTE_ADDR']
 )));
